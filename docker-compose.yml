@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  docker-aptly:
+    restart: always
+    image: lnls/docker-aptly
+    ports:
+      - "80:80/tcp"
+    container_name: docker-aptly
+    logging:
+      driver: syslog
+    volumes:
+      - type: bind
+        source: /opt/aptly
+        target: /opt/aptly
+    environment:
+      - FULL_NAME="First Last"
+      - EMAIL_ADDRESS="youremail@example.com"
+      - GPG_PASSWORD="PickAPassword"
+      - HOSTNAME=aptly.example.com
+    dns: 10.128.255.7
+    dns_search: lnls-sirius.com.br
